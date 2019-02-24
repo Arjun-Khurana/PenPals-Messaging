@@ -22,19 +22,21 @@ io.on('connection', function(socket)
 	socket.on('shaggy', function(msg)
 	{
 		headers={'Content-Type' : 'application/json'};
-		fetch(URL, {method : 'POST', headers : headers, body : JSON.stringify({"language" : msg.lang, "text" : msg.text})})
+		fetch(URL, {method : 'POST', headers : headers, body : JSON.stringify({"language" : msg.targetLang, "text" : msg.text})})
 	    	.then(res => res.json())
 	    	.then(body => {
 	    		toSend = {};
+	    		console.log(msg)
 	    		toSend[msg.lang] = {
 	    			message : msg.text,
-	    			language : msg.lang
+	    			language : msg.lang,
 	    		};
 	    		toSend[body.language] = {
 	    			message : body.translatedText,
-	    			language : body.langauge
+	    			language : body.language
 	    		};
 	    		toSend["username"] = msg.username;
+	    		console.log(toSend)
 	    		io.emit('scooby', toSend);
 	    	});
 	});
