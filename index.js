@@ -2,6 +2,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const fetch = require('node-fetch');
+const PORT = process.env.PORT || 3000;
 
 const URL = 'https://rocky-mesa-28651.herokuapp.com'
 
@@ -27,7 +28,7 @@ io.on('connection', function(socket)
 	});
 });
 
-http.listen(3000, function()
+http.listen(PORT, function()
 {
 	console.log('listening on *:3000');
 });
