@@ -14,7 +14,7 @@ app.get('/', function(req, res)
 io.on('connection', function(socket)
 {	
 	
-	console.log('user connected');
+	console.log(' connected');
 	socket.on('disconnect', function()
 	{
 		console.log('user disconnected');
@@ -25,22 +25,18 @@ io.on('connection', function(socket)
 		fetch(URL, {method : 'POST', headers : headers, body : JSON.stringify({"language" : msg.lang, "text" : msg.text})})
 	    	.then(res => res.json())
 	    	.then(body => {
-	    		toSend = {
-	    			original : {
-	    				message : msg.text,
-	    				language : msg.lang
-	    			},
-	    			translated : {
-	    				message : body.translatedText,
-	    				language : body.language
-	    			},
-	    			username : msg.username
+	    		toSend = {};
+	    		toSend[msg.lang] = {
+	    			message : msg.text,
+	    			language : msg.lang
 	    		};
+	    		toSend[body.language] = {
+	    			message : body.translatedText,
+	    			language : body.langauge
+	    		};
+	    		toSend[username] = msg.username;
 	    		io.emit('scooby', toSend);
-	    		
-	    		
 	    	});
-	    	
 	});
 });
 

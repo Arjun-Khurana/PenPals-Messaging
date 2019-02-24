@@ -20,7 +20,7 @@
       var socket = io();
       $('form').submit(function(e){
         e.preventDefault(); // prevents page reloading
-        msg = {lang : "es", text : $('#m').val()}
+        msg = {lang : "es", text : $('#m').val(), username : "arjun"}
         socket.emit('shaggy', msg);
         $('#m').val('');
         //return false;
