@@ -34,7 +34,7 @@ io.on('connection', function(socket)
 	    			message : body.translatedText,
 	    			language : body.langauge
 	    		};
-	    		toSend[username] = msg.username;
+	    		toSend["username"] = msg.username;
 	    		io.emit('scooby', toSend);
 	    	});
 	});
