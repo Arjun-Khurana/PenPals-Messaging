@@ -22,7 +22,7 @@
         e.preventDefault(); // prevents page reloading
         msg = {lang : "es", text : $('#m').val()}
         socket.emit('shaggy', msg);
-        //$('#m').val('');
+        $('#m').val('');
         //return false;
       });
       socket.on('scooby', function(msg){
